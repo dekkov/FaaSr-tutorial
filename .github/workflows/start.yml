@@ -1,4 +1,4 @@
-name: Running Action- start
+name: start
 on:
   workflow_dispatch:
     inputs:
