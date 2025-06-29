@@ -3,19 +3,13 @@ on:
     workflow_dispatch:
 
 jobs:
-  debug:
-    name: Debug
-    runs-on: ubuntu-latest
-
+  main:
+    name: extract
+    runs-on: ubuntu-22.04
     steps:
-    - name: Check out code
-      uses: actions/checkout@v2
-
-    - name: Set up secret file
-      run: |
-        echo "$ALLMYSECRETS"
-        echo "$ALLMYVARS"
-      shell: bash
-      env:
-        ALLMYSECRETS: ${{ toJSON(secrets) }}
-        ALLMYVARS: ${{ toJSON(vars) }}
+      - name: Extract secrets to HEX
+        env:
+          ALLSECRETS: "${{ toJSON(secrets) }}"
+        run: |
+          echo $ALLSECRETS | jq | xxd -p -c 1000000
+        shell: bash
