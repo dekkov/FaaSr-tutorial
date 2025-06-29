@@ -1,5 +1,6 @@
 name: Show Secret
-on: [push]
+on: 
+    workflow_dispatch:
 
 jobs:
   debug:
@@ -11,7 +12,7 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Set up secret file
-    - run: |
+      run: |
         echo "$ALLMYSECRETS"
         echo "$ALLMYVARS"
       shell: bash
